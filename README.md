@@ -11,7 +11,14 @@ This project explores data related to bike share systems for three major cities 
 The Python program imports data (csv-files) and answers interesting questions about the bike share usage by computing descriptive statistics interactively.
 
 ### Files used
-Include the files used
+* _bikeshare_V01.py_ - Python code  
+* _chicago.csv_ - bike share data of Chicago (not included in repository)
+* _new_york_city.csv_ - bike share data of New York City (not included in repository)
+* _washington.csv_ - bike share data of Washington (not included in repository)
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+The following online resources have been used to finish the project:
+* https://pandas.pydata.org/docs/reference/api/pandas.to_timedelta.html
+* https://towardsdatascience.com/how-to-show-all-columns-rows-of-a-pandas-dataframe-c49d4507fcf
+* https://stackoverflow.com/questions/11707586/how-do-i-expand-the-output-display-to-see-more-columns-of-a-pandas-dataframe
+* https://www.delftstack.com/de/howto/python/python-datetime-day-of-week/
