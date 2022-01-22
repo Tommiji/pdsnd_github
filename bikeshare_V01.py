@@ -227,6 +227,7 @@ def display_raw_data(df):
     print('\nDisplaying User data \n')
     start_time = time.time()
     counter = 0
+    # 'num_lines' specifies the number of lines that are displayed at a time and can be changed by preference
     num_lines = 5
     # Display only 'num_lines' rows at a time, ask user if he/she wants to see 'num_lines' more
     while counter < df.shape[0]:
