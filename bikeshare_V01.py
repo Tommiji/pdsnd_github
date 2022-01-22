@@ -13,7 +13,7 @@ lst_valid_cities = ['Chicago', 'New York City', 'Washington']
 lst_valid_months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'All']
 
 # list of valid days for user input
-lst_valid_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'All']
+lst_valid_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'All']
 
 
 def get_filters():
