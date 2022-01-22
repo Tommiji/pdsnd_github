@@ -22,7 +22,7 @@ def get_filters():
 
     Args:
         none
-        
+
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -34,30 +34,30 @@ def get_filters():
     city = get_user_input(lst_valid_cities, 'Which city do you want to explore? (' + ', '.join(lst_valid_cities) + '; ' + char_abort +' to quit): ', char_abort)
     if city == char_abort:
         return 0
-    
+
     # get user input for month (all, january, february, ... , june)
     month = get_user_input(lst_valid_months, 'Which month do you want to explore? (' + ', '.join(lst_valid_months) + '; ' + char_abort +' to quit): ', char_abort)
     if month == char_abort:
         return 0
-    
+
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = get_user_input(lst_valid_days, 'Which day do you want to explore? (' + ', '.join(lst_valid_days) + '; ' + char_abort +' to quit): ', char_abort)
     if day == char_abort:
         return 0
-    
+
     print('-'*40)
     return city, month, day
 
 
 def get_user_input(lst_valid_args, str_question, chr_abort):
     """
-    Asks user as long as a valid argument is passed.
-    
+    Asks user as long as a valid argument or the defined 'abort key' is passed.
+
     Args:
         (str) lst_valid_args - list of valid arguments
         (str) str_question - string displayed at user input
         (str) chr_abort - character that terminates the program
-        
+
     Returns:
         (str) user_input - valid argument from handed over list OR character for program termination
     """
@@ -75,31 +75,31 @@ def load_data(city, month, day):
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    
+
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
     print("\nLoading data for city: {}, month(s): {}, day(s) of week: {}\n".format(city, month, day))
     print('-'*40)
-    
+
     #load csv-file
     df = pd.read_csv(CITY_DATA[city.lower()])
-    
+
     #convert columns to datetime / timedelta data type
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['Trip Duration'] = pd.to_timedelta(df['Trip Duration'], unit = 's')
-    
+
     #add additional columns for further calculations
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.strftime("%A")
     df['Start End Station Combination'] = "'" + df['Start Station'] + "' and '" + df['End Station'] + "'"
-    
+
     # filter for month if a month was selected
-    if month != lst_valid_months[-1]: 
+    if month != lst_valid_months[-1]:
         df = df[df['month'] == lst_valid_months.index(month) + 1]
-        
+
     # filter for day if a day was selected
-    if day != lst_valid_days[-1]: 
+    if day != lst_valid_days[-1]:
         df = df[df['day_of_week'] == day]
     return df
 
@@ -107,10 +107,10 @@ def load_data(city, month, day):
 def time_stats(df):
     """
     Displays statistics on the most frequent times of travel.
-    
+
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     Returns:
         None
     """
@@ -133,10 +133,10 @@ def time_stats(df):
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip.
-      
+
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     Returns:
         None
     """
@@ -159,10 +159,10 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration.
-        
+
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     Returns:
         None
     """
@@ -183,10 +183,10 @@ def trip_duration_stats(df):
 
 def user_stats(df):
     """Displays statistics on bikeshare users.
-        
+
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     Returns:
         None
     """
@@ -203,11 +203,11 @@ def user_stats(df):
         print('\nGender count: \n{}'.format(df['Gender'].value_counts()))
     else:
         print("\nNo data for 'gender' statistics available.\n")
-        
+
     # Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         print("\nEarliest year of birth: {}".format(df['Birth Year'].min()))
-        print("\nMost recent year of birth: {}".format(df['Birth Year'].max()))    
+        print("\nMost recent year of birth: {}".format(df['Birth Year'].max()))
         print("\nMost common year of birth: {}".format(df['Birth Year'].mode()[0]))
     else:
         print("\nNo data for 'date of birth' statistics available.\n")
@@ -216,10 +216,10 @@ def user_stats(df):
 
 def display_raw_data(df):
     """Displays raw data of filtered dataset in blocks of 5 lines.
-        
+
     Args:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     Returns:
         None
     """
@@ -231,16 +231,16 @@ def display_raw_data(df):
     # Display only 'num_lines' rows at a time, ask user if he/she wants to see 'num_lines' more
     while counter < df.shape[0]:
         # Display columns from original dataset, except 1st column 'Unnamed'
-        print(df[counter:counter+num_lines][df.columns[1:-3]]) 
+        print(df[counter:counter+num_lines][df.columns[1:-3]])
         if input("\nDo you want to see 5 more lines [y for yes, other for no]? ").lower() == 'y':
             counter += num_lines
             print("\nLines {} to {} of {}: \n".format(counter+1, counter + num_lines, df.shape[0]))
         else:
             break
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-   
+
 
 def main():
     while True:
@@ -263,7 +263,7 @@ def main():
                     display_raw_data(df)
                 else:
                     print("\nNo raw data is displayd.\n")
-    
+
             restart = input('\nWould you like to restart? Enter yes or no.\n')
             if restart.lower() != 'yes':
                 break
