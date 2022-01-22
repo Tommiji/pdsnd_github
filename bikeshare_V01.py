@@ -2,6 +2,9 @@ import time
 import pandas as pd
 import numpy as np
 
+# string that separates the different statistics in user output
+strSeparation = '-'*40
+
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -45,7 +48,7 @@ def get_filters():
     if day == char_abort:
         return 0
 
-    print('-'*40)
+    print(strSeparation)
     return city, month, day
 
 
@@ -80,7 +83,7 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     print("\nLoading data for city: {}, month(s): {}, day(s) of week: {}\n".format(city, month, day))
-    print('-'*40)
+    print(strSeparation)
 
     #load csv-file
     df = pd.read_csv(CITY_DATA[city.lower()])
@@ -128,7 +131,7 @@ def time_stats(df):
     print("Most common start hour: {}".format(df['Start Time'].dt.hour.mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print(strSeparation)
 
 
 def station_stats(df):
@@ -154,7 +157,7 @@ def station_stats(df):
     print("Most frequent combination of start station and end station: {}".format(df['Start End Station Combination'].mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print(strSeparation)
 
 
 def trip_duration_stats(df):
@@ -178,7 +181,7 @@ def trip_duration_stats(df):
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print(strSeparation)
 
 
 def user_stats(df):
@@ -212,7 +215,7 @@ def user_stats(df):
     else:
         print("\nNo data for 'date of birth' statistics available.\n")
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print(strSeparation)
 
 def display_raw_data(df):
     """Displays raw data of filtered dataset in blocks of 5 lines.
@@ -239,7 +242,7 @@ def display_raw_data(df):
             break
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print(strSeparation)
 
 
 def main():
